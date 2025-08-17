@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+  <form action="{% url 'generate_notes' %}" class="d-flex justify-content-center mb-4" role="search" method="post">
+    {% csrf_token %}
+    <input class="form-control me-2" type="url" name="url" placeholder="Paste YouTube video URL here..." style="width: 600px" required />
+    <button class="btn btn-outline-success" type="submit">Generate</button>
+  </form>
+
+  {% if video %}
+    <div class="card p-4">
+        <h5>Generated Notes:</h5>
+        <pre style="white-space: pre-wrap;">{{ video.notes|default:"Notes not generated." }}</pre>
+    </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}
